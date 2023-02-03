@@ -1,7 +1,7 @@
 package com.vone.javarest.entity;
 
 import java.sql.Timestamp;
-import java.util.UUID;
+import java.util.Random;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,7 +19,7 @@ public class CommentEntity {
     @Id
     @GeneratedValue
     @Column(name = "comment_id")
-    private UUID id;
+    private Long id;
     @Column(name = "comment_body")
     private String comment;
     @Column(name = "comment_user_name")
@@ -29,15 +29,15 @@ public class CommentEntity {
     
     @ManyToOne(targetEntity = ThreadEntity.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
-    private UUID cThreadId;
+    private Long cThreadId;
     
     public CommentEntity(String comment, String userName) {
-        this.id = UUID.randomUUID();
+        this.id = new Random().nextLong();
         this.comment = comment;
         this.userName = userName;
         this.dateCreated = new Timestamp(System.currentTimeMillis());
     }
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
     public String getComment() {

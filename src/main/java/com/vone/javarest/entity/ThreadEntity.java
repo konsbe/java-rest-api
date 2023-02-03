@@ -1,16 +1,12 @@
 package com.vone.javarest.entity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Random;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -21,48 +17,72 @@ public class ThreadEntity {
     @Id
     @GeneratedValue
     @Column(name = "thread_id")
-    private final UUID id;
+    private final Long thread_id;
     
     @Column(name = "thread_header")
-    private final String threadHeader;
+    private final String thread_header;
     
     @Column(name = "thread_body")
-    private final String threadBody;
+    private final String thread_body;
     
     @Column(name = "thread_likes")
-    private final int likes;
+    private final int thread_likes;
     
     @Column(name = "thread_date_created")
-    private final Timestamp dateCreated;
+    private final Timestamp thread_date_created;
+
+    // private ArrayList<CommentEntity> comments;
     
-    @OneToMany(targetEntity = CommentEntity.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
-    private ArrayList<CommentEntity> comments;
+    // @OneToMany(targetEntity = CommentEntity.class, cascade = CascadeType.ALL)
+    // @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
+    // private ArrayList<CommentEntity> comments;
     
     
-    public ThreadEntity(String thread_header, String thread_body) {
-        this.id = UUID.randomUUID();
-        this.threadHeader = thread_header;
-        this.threadBody = thread_body;
-        this.likes = 0;
-        this.dateCreated = new Timestamp(System.currentTimeMillis());
+    public ThreadEntity(Long thread_id, String thread_header, String thread_body) {
+        this.thread_id = new Random().nextLong();
+        this.thread_header = thread_header;
+        this.thread_body = thread_body;
+        this.thread_likes = 0;
+        this.thread_date_created = new Timestamp(System.currentTimeMillis());
+        // this.comments = new ArrayList<CommentEntity>();
     }
 
-    public UUID getId() {
-        return id;
+
+    public Long getThread_id() {
+        return thread_id;
     }
-    public String getThreadHeader() {
-        return threadHeader;
+
+
+    public String getThread_header() {
+        return thread_header;
     }
-    public String getThreadBody() {
-        return threadBody;
+
+
+    public String getThread_body() {
+        return thread_body;
     }
-    public int getLikes() {
-        return likes;
+
+
+    public int getThread_likes() {
+        return thread_likes;
     }
-    public Timestamp getDateNow() {
-        return dateCreated;
+
+
+    public Timestamp getThread_date_created() {
+        return thread_date_created;
     }
+
+
+    // public ArrayList<CommentEntity> getComments() {
+    //     return comments;
+    // }
+
+
+    // public void setComments(ArrayList<CommentEntity> comments) {
+    //     this.comments = comments;
+    // }
+
+
     
     
 }
