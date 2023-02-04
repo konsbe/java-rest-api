@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ import com.vone.javarest.entity.ThreadEntity;
 import com.vone.javarest.service.ThreadService;
 
 @RestController
-@RequestMapping("/threads")
+@RequestMapping(value="/threads")
 public class ThreadController {
 
     @Autowired
@@ -27,28 +29,28 @@ public class ThreadController {
     }
 
     @GetMapping
-    public List<ThreadEntity> getAllThreads(){
-        return threadService.getAllThreads();
+    public ResponseEntity<List<ThreadEntity>> getAllThreads(){
+        return new ResponseEntity<>(threadService.getAllThreads(), HttpStatus.OK);
     } 
 
     @PostMapping
-    public ThreadEntity postThread(@RequestBody ThreadEntity threadEntity) {
-        return threadService.postThread(threadEntity);
+    public ResponseEntity<ThreadEntity> postThread(@RequestBody ThreadEntity threadEntity) {
+        return new ResponseEntity<>(threadService.postThread(threadEntity), HttpStatus.OK);
     }
     
     @GetMapping("/find/{id}")
-    public Optional<ThreadEntity> getThreadById(@PathVariable("id") final Long id){
-        return threadService.getThreadById(id);
+    public ResponseEntity<Optional<ThreadEntity>> getThreadById(@PathVariable("id") final Long id){
+        return new ResponseEntity<>(threadService.getThreadById(id), HttpStatus.OK);
     }
     
-    
     @PutMapping
-    public ThreadEntity updateThread(@RequestBody ThreadEntity threadEntity) {
-        return threadService.updateThread(threadEntity);
+    public ResponseEntity<ThreadEntity> updateThread(@RequestBody ThreadEntity threadEntity) {
+        return new ResponseEntity<>(threadService.updateThread(threadEntity), HttpStatus.OK);
     }
     
     @DeleteMapping("/delete/{id}")
-    public void deleteThread(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteThread(@PathVariable("id") Long id) {
         threadService.deleteThread(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
