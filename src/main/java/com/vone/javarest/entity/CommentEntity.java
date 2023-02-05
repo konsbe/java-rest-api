@@ -11,9 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "mt-comments")
+@Data
 public class CommentEntity {
     
     @Id
@@ -31,10 +33,12 @@ public class CommentEntity {
     @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
     private Long cThreadId;
     
-    public CommentEntity(String comment, String userName) {
+    public CommentEntity(){};
+    public CommentEntity(String comment, String userName, Long threadId) {
         this.id = new Random().nextLong();
         this.comment = comment;
         this.userName = userName;
+        this.cThreadId = threadId;
         this.dateCreated = new Timestamp(System.currentTimeMillis());
     }
     public Long getId() {

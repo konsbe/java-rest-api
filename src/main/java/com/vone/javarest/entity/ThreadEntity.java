@@ -2,11 +2,15 @@ package com.vone.javarest.entity;
 
 import java.sql.Timestamp;
 // import java.util.Random;
+import java.util.ArrayList;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,10 +42,10 @@ public class ThreadEntity{
 
     // private ArrayList<CommentEntity> comments;
     
-    // @OneToMany(targetEntity = CommentEntity.class, cascade = CascadeType.ALL)
-    // @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
-    // private ArrayList<CommentEntity> comments;
-    // public ThreadEntity() {};
+    @OneToMany(targetEntity = CommentEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
+    public static ArrayList<CommentEntity> comments;
+    
     public ThreadEntity(Long thread_id, String thread_header, String thread_body, int thread_likes,
     Timestamp thread_date_created) {
         this.thread_id = thread_id;
@@ -90,13 +94,13 @@ public class ThreadEntity{
     }
 
 
-    // public ArrayList<CommentEntity> getComments() {
-    //     return comments;
-    // }
+    public static ArrayList<CommentEntity> getComments() {
+        return comments;
+    }
 
 
     // public void setComments(ArrayList<CommentEntity> comments) {
-    //     this.comments = comments;
+    //     comments = comments;
     // }
 
 
