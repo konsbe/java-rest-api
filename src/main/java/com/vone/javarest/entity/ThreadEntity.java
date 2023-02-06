@@ -55,18 +55,6 @@ public class ThreadEntity{
         this.thread_date_created = new Timestamp(System.currentTimeMillis());
     }
 
-
-    
-    // public ThreadEntity(Long thread_id, String thread_header, String thread_body) {
-    //     this.thread_id = new Random().nextLong();
-    //     // this.thread_id = thread_id;
-    //     this.thread_header = thread_header;
-    //     this.thread_body = thread_body;
-    //     this.thread_likes = 0;
-    //     this.thread_date_created = new Timestamp(System.currentTimeMillis());
-    //     // this.comments = new ArrayList<CommentEntity>();
-    // }
-
     public Long getThread_id() {
         return thread_id;
     }
