@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.vone.javarest.entity.CommentEntity;
 
 public interface CommentService {
-    List<CommentEntity> getAllThreadComments(Iterable<Long> threadId);
+    List<CommentEntity> getAllThreadComments(Long threadId);
     Optional<CommentEntity> getCommentById(Long id);
     CommentEntity postComment(CommentEntity commentEntity);
     CommentEntity updateComment(CommentEntity commentEntity);

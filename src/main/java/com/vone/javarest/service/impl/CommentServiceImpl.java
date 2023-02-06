@@ -1,5 +1,7 @@
 package com.vone.javarest.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +23,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentEntity> getAllThreadComments(Iterable<Long> threadId) {
-        return commentRepository.findAllById(threadId);
+    public List<CommentEntity> getAllThreadComments(Long threadId) {
+        List<Long> ids = new ArrayList<Long>();
+        ids.add(threadId);
+        Iterable<Long> iterable = ids;
+        return commentRepository.findAllById(iterable);
     }
 
     @Override

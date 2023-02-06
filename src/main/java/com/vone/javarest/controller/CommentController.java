@@ -30,7 +30,7 @@ public class CommentController {
     }
     
     @GetMapping("/thread/{threadId}")
-    public List<CommentEntity>  getAllThreadComments(@PathVariable("threadId") final Iterable<Long> id){
+    public List<CommentEntity>  getAllThreadComments(@PathVariable("threadId") final Long id){
         return commentService.getAllThreadComments(id);
     }
 
