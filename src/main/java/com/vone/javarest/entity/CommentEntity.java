@@ -29,8 +29,7 @@ public class CommentEntity {
     @Column(name = "comment_date_created")
     private Timestamp dateCreated;
     
-    @ManyToOne(targetEntity = ThreadEntity.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "c_thread_id", referencedColumnName = "thread_id")
+    @Column(name = "c_thread_id")
     private Long cThreadId;
     
     public CommentEntity(){};

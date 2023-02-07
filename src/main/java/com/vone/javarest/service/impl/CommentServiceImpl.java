@@ -1,11 +1,10 @@
 package com.vone.javarest.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.vone.javarest.entity.CommentEntity;
@@ -23,11 +22,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Query("select * from \"mt-comments\" where mt where mt.c_thread_id LIKE %?1%")
     public List<CommentEntity> getAllThreadComments(Long threadId) {
-        List<Long> ids = new ArrayList<Long>();
-        ids.add(threadId);
-        Iterable<Long> iterable = ids;
-        return commentRepository.findAllById(iterable);
+        return commentRepository.findBycThreadId(threadId);
     }
 
     @Override
