@@ -30,7 +30,8 @@ public class CommentController {
     }
     
     @GetMapping("/thread/{threadId}")
-    public ResponseEntity<List<CommentEntity>>  getAllThreadComments(@PathVariable final Long threadId){
+    public ResponseEntity<List<CommentEntity>>  getAllThreadComments(@PathVariable("threadId") final Long threadId){
+        System.out.println("threadId: "+threadId);
         return new ResponseEntity<>(commentService.getAllThreadComments(threadId), HttpStatus.OK);
     }
 
