@@ -63,8 +63,8 @@ public class RabbitMqConfig {
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setAddresses("localhost");  // or your RabbitMQ server address
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
+        connectionFactory.setUsername("admin");
+        connectionFactory.setPassword("aDmin@");
         connectionFactory.setChannelCheckoutTimeout(10000); // Extended timeout
         connectionFactory.setChannelCacheSize(25); // Adjust based on concurrency needs
         return connectionFactory;

@@ -36,7 +36,7 @@ public class SciUserEntity {
 
     @Column(name = "image_type ")
     protected String image_type ;
-    
+
     @Column(name = "created_at")
     protected Timestamp created_at;
 
