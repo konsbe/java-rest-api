@@ -11,10 +11,12 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.core.env.Environment;
 
 @Configuration
 public class RabbitMqConfig {
@@ -25,6 +27,8 @@ public class RabbitMqConfig {
     private String topicExchangeName;
     @Value("${rabbitmq.queue.route.key}")
     private String routingKey;
+    @Autowired
+    private Environment environment;
 
     @Bean
     Queue queue() {
@@ -60,11 +64,12 @@ public class RabbitMqConfig {
     //     // views
     //     return new Jackson2JsonMessageConverter(mapper);
     // }
+    @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setAddresses("localhost");  // or your RabbitMQ server address
-        connectionFactory.setUsername("admin");
-        connectionFactory.setPassword("aDmin@");
+        connectionFactory.setUsername(environment.getProperty("sci_tech_city_rabbitmq.username").toString());
+        connectionFactory.setPassword(environment.getProperty("sci_tech_city_rabbitmq.password").toString());
         connectionFactory.setChannelCheckoutTimeout(10000); // Extended timeout
         connectionFactory.setChannelCacheSize(25); // Adjust based on concurrency needs
         return connectionFactory;

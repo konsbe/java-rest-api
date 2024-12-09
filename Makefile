@@ -9,7 +9,7 @@ build-img:
 
 # Run the Docker container locally
 run:
-	sudo docker run --name sci_tech_city_java_rest -it -p 8081:8081 --network host sci-tech-city-java-rest:17-jdk-alpine
+	sudo docker run --name sci_tech_city_java_rest -it -dp 8081:8081 --network host sci-tech-city-java-rest:17-jdk-alpine
 
 # Stop and remove the Docker container if it's already running
 clean:
